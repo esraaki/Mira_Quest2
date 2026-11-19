@@ -1,0 +1,31 @@
+
+/* Voyager adventure extension: reuse the previous chapters' glass dialogue vocabulary. */
+.va-adventure{--va-ink:#f8f3e8;--va-gold:#e6c78e;color:var(--va-ink);overflow:hidden}
+.va-backdrop img{width:100%;height:100%;object-fit:cover;opacity:.48;filter:saturate(.78)}
+.va-header{position:absolute;top:0;left:0;right:0;z-index:6;display:flex;align-items:center;justify-content:space-between;padding:18px clamp(18px,3vw,48px);gap:16px;background:linear-gradient(#030916bb,transparent);font:600 11px/1.4 'IBM Plex Mono',monospace;letter-spacing:.11em}
+.va-header div{display:flex;gap:12px}.va-header button{color:#f1eadd;border:1px solid #ffffff55;background:#07101b77;padding:9px 12px;cursor:pointer;border-radius:4px}
+.va-brand{font-weight:800;font-size:15px;letter-spacing:.2em}.va-scene-heading{position:absolute;top:clamp(86px,12vh,140px);left:clamp(24px,5vw,85px);right:20px;z-index:2;pointer-events:none}
+.va-overline{font:600 10px 'IBM Plex Mono',monospace;letter-spacing:.14em;color:var(--va-gold)}.va-scene-heading h1{font-size:clamp(25px,4vw,52px);margin:8px 0;font-weight:500;max-width:680px;text-shadow:0 2px 30px #000}
+.va-dialogue{position:absolute!important;bottom:45px!important;left:50%!important;transform:translateX(-50%);width:min(990px,calc(100% - 40px))!important;z-index:4;max-height:56vh;overflow:auto;background:linear-gradient(120deg,rgba(11,24,40,.88),rgba(14,32,47,.84))!important;border:1px solid rgba(217,227,231,.23)!important;backdrop-filter:blur(18px);border-radius:18px;padding:24px 30px!important;box-shadow:0 24px 60px #0006}
+.va-dialogue p{font-size:clamp(15px,1.5vw,19px);line-height:1.65;margin:12px 0 20px}
+.va-dialogue .v-controls{margin-top:14px}.va-reply{background:#ffffff0e;padding:12px 14px;border-left:2px solid var(--va-gold);font-size:15px!important}
+.va-questions{position:absolute;right:5vw;top:28%;width:min(290px,32vw);z-index:3;display:flex;flex-direction:column;gap:8px}
+.va-questions span{font:600 10px 'IBM Plex Mono',monospace;letter-spacing:.13em;color:var(--va-gold)}
+.va-questions button,.va-select{color:#f9f5eb;background:#102539d9;border:1px solid #ffffff38;padding:13px;text-align:left;cursor:pointer;border-radius:9px;transition:.2s}
+.va-questions button:hover,.va-select:hover{background:#1c4059;border-color:var(--va-gold)}
+.va-investigation{position:absolute;z-index:5;left:50%;bottom:35px;transform:translateX(-50%);width:min(1060px,calc(100% - 36px));max-height:75vh;overflow:auto}
+.va-tool{border:1px solid #ffffff36;border-radius:18px;background:linear-gradient(120deg,#081a2bec,#112c40e8);backdrop-filter:blur(18px);padding:20px 24px;box-shadow:0 20px 60px #000a}
+.va-tool h2{font-size:clamp(21px,2.6vw,30px);font-weight:500;margin:6px 0 15px}
+.va-side-image{width:42%;max-height:235px;object-fit:contain;float:left;margin:0 25px 12px 0;background:#0006;border-radius:9px}
+.va-feature-image{width:100%;max-height:215px;object-fit:contain;background:#01070b;border-radius:9px}
+.va-record-image{height:220px;max-width:100%;display:block;margin:0 auto;object-fit:contain}
+.va-choices{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:9px;margin:14px 0}
+.va-select strong,.va-select small{display:block}.va-select strong{font-size:14px}.va-select small{font:12px/1.5 'Manrope',sans-serif;opacity:.74;margin-top:5px}.va-done{border-color:#dfc389;background:#355044}
+.va-feedback{font-size:13px;line-height:1.5;color:#cddce2;margin:10px 0}.va-tool-actions{display:flex;justify-content:flex-end;margin-top:12px}.va-tool-actions button:disabled{opacity:.32;cursor:not-allowed}
+.va-pale-overlay{position:relative;height:0}.va-earthspot{position:absolute;top:-135px;left:58%;width:48px;height:48px;transform:translate(-50%,-50%);border:1px dashed #e9d3a8;color:#f1deb1;background:#09203344;border-radius:50%;cursor:crosshair;font-size:25px}
+.va-media{padding:13px 17px;border:1px dashed #b3bcc275;background:#0a1118a8;margin:12px 0;border-radius:9px;display:flex;flex-direction:column;gap:5px}
+.va-media span{font:10px 'IBM Plex Mono',monospace;letter-spacing:.15em;color:#e0c58c}.va-media b{font-size:15px}.va-media p{font-size:12px;margin:0}.va-media small{font-size:10px;color:#b8bbc0}
+.va-readings{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.va-readings>div{padding:15px;background:#061421c7;border:1px solid #9ab1be55;border-radius:9px}.va-readings small,.va-readings strong,.va-readings span{display:block}.va-readings small{font-size:10px;color:#e6c78e}.va-readings strong{font-size:19px;margin:8px 0}.va-readings span{font-size:12px;color:#bbcbd1}
+.va-radio{padding:20px;background:#020910;border:1px solid #59839a;border-radius:10px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}.va-radio span{font:11px 'IBM Plex Mono',monospace;color:#b4c9d9}.va-radio code{font:15px 'IBM Plex Mono',monospace;color:#f1dca0;word-break:break-word}
+.va-credit{position:absolute;bottom:9px;left:4%;right:4%;display:flex;justify-content:space-between;z-index:2;gap:10px;font:10px 'IBM Plex Mono',monospace;color:#bbc1c9}.va-credit a{color:inherit}.va-archive{overflow:auto}.va-archive-inner{position:relative;z-index:3;padding:130px 5vw 60px}.va-archive-inner h1{font-size:35px}.va-archive-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin:28px 0}.va-archive-grid button{color:white;text-align:left;background:#0c2333;border:1px solid #ffffff33;border-radius:12px;overflow:hidden;cursor:pointer;padding:0 0 15px}.va-archive-grid img{width:100%;height:118px;object-fit:cover}.va-archive-grid b,.va-archive-grid span{display:block;padding:7px 12px 0}.va-archive-grid span{font-size:10px;opacity:.65}
+@media(max-width:720px){.va-header{padding:12px}.va-header>span:nth-child(2){display:none}.va-questions{left:18px;right:18px;top:23%;width:auto;flex-direction:row;overflow:auto}.va-questions button{min-width:210px}.va-dialogue{bottom:38px!important;padding:15px 17px!important;max-height:56vh}.va-investigation{bottom:28px;max-height:70vh}.va-tool{padding:14px}.va-side-image{width:100%;float:none;max-height:135px;margin:0}.va-feature-image{max-height:160px}.va-scene-heading{top:70px}.va-scene-heading h1{font-size:24px}.va-credit span{display:none}.va-record-image{height:165px}}
