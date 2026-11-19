@@ -154,7 +154,8 @@ V('Space between stars is immense. It will take far longer than the expected ope
 P('So eventually Earth will stop hearing from you, but you keep going with that record.'),
 V('Yes. The spacecraft’s movement is not maintained by its transmitter.'),
 P('Can I ask you one last thing?'),
-V('Of course.')
+V('Of course. But I would like to ask you something first.'),
+V('I have been away from Earth since 1977. You know the world I left much better than I do. What would you want me to know about it today?')
 ],kind:'future',prompt:'Choose what you would tell a traveler from Earth',after:[
 P('I came here wondering how a little machine could travel so fast. Now I cannot stop thinking about the people who decided to send it at all.'),
 V('The encounter images, scientific measurements and records of the mission will remain on Earth. The disc will continue with the spacecraft as long as it survives.'),
@@ -181,7 +182,8 @@ function header(c){return '<header class="va-header"><span class="va-brand">MIRA
 function dialogue(){
  const c=ch(),set=state.phase==='intro'?c.intro:c.after,item=set[state.line],isLast=state.line===set.length-1;
  const label=item.who==='PLAYER'?player:item.who;
- const box='<section class="mq-dialogue mq-card va-dialogue"><div class="mq-speaker"><b>'+esc(label)+'</b></div><p class="mq-speech">'+esc(item.text)+'</p>'+(state.reply?'<p class="va-reply">'+esc(state.reply)+'</p>':'')+
+ const choice=state.chapter===chapters.length-1&&state.phase==='after'&&state.line===0?(seen().includes('life')?'We have sent new spacecraft to worlds you never reached. We are still discovering how much we do not know.':seen().includes('earth')?'Earth is still filled with oceans, cities, living things, and people looking up. It is complicated and beautiful.':seen().includes('record')?'I would tell a future finder that Earth held people who wanted to understand the universe, even when they did not know if anyone else was listening.':null):null;
+ const box='<section class="mq-dialogue mq-card va-dialogue"><div class="mq-speaker"><b>'+esc(label)+'</b></div><p class="mq-speech">'+esc(choice||item.text)+'</p>'+(state.reply?'<p class="va-reply">'+esc(state.reply)+'</p>':'')+
  '<div class="mq-dialogue-actions va-dialogue-actions"><button class="mq-btn subtle" data-va="back" '+(state.line===0?'disabled':'')+'>← BACK</button><button class="mq-btn primary" data-va="next">'+(isLast?(state.phase==='intro'?'INVESTIGATE →':state.chapter===chapters.length-1?'COMPLETE JOURNEY →':'CONTINUE JOURNEY →'):'CONTINUE →')+'</button></div></section>';
  return box;
 }
