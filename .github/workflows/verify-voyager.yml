@@ -6,6 +6,7 @@ on:
       - 'src/**'
       - 'index.html'
       - 'voyager.css'
+      - 'voyager-adventure.css'
       - 'smoke-test.cjs'
   workflow_dispatch:
 permissions:
@@ -20,6 +21,7 @@ jobs:
           node --check src/game-next.js
           node --check src/story.js
           node --check src/voyager.js
+          node --check src/voyager-adventure.js
           node --check src/voyager-story.js
       - name: Test mission-card and Voyager navigation
         run: |
