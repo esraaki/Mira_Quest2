@@ -63,3 +63,11 @@
 @media(max-width:850px){.mq-mission-cards{grid-template-columns:1fr 1fr}.v-dialogue{max-height:54vh}.v-scene-title{top:13%}}
 @media(max-width:600px){.mq-hub{padding-top:95px}.mq-mission-cards{grid-template-columns:1fr;gap:15px}.mq-mission-card{min-height:0}.mq-mission-cover{height:210px}.v-header{gap:8px;padding:0 14px}.v-header>span{display:none}.v-header button{font-size:9px;padding:7px}.v-scene-title{left:5%;top:12%}.v-scene-title h1{font-size:30px}.v-speed{font-size:22px}.v-dialogue{bottom:2%;padding:14px 16px;max-height:58vh}.v-dialogue>p{font-size:15px;line-height:1.62}.v-choices{grid-template-columns:1fr}.v-controls{gap:6px}.v-controls button{font-size:9px;padding:8px}.v-credit{font-size:7px}.v-archive-grid{grid-template-columns:1fr 1fr}}
 @media(prefers-reduced-motion:reduce){.v-backdrop img,.mq-mission-cover img{animation:none!important;transition:none!important}}.v-reduced .v-backdrop img{animation:none!important}
+
+/* The opening is a short cinematic flyby using a still NASA artist concept. */
+.v-opening-rush img{animation:vOpeningFlyby 2.2s cubic-bezier(.22,.68,.14,1) both!important}
+.v-opening-rush::after{content:"";position:absolute;inset:-25%;background:repeating-linear-gradient(110deg,transparent 0 33px,#a7d3ff44 34px 35px,transparent 36px 100px);opacity:0;pointer-events:none;animation:vStarRush 2.2s ease-out both}
+@keyframes vOpeningFlyby{0%{transform:translateX(46%) scale(.68);filter:blur(7px);opacity:.08}36%{transform:translateX(-6%) scale(1.35);filter:blur(0);opacity:1}100%{transform:translateX(0) scale(1.08);filter:blur(0);opacity:1}}
+@keyframes vStarRush{0%{opacity:.75;transform:translateX(10%)}45%{opacity:.35;transform:translateX(-12%)}100%{opacity:0;transform:translateX(-21%)}}
+@media(prefers-reduced-motion:reduce){.v-opening-rush img,.v-opening-rush::after{animation:none!important}}
+.v-reduced .v-opening-rush img,.v-reduced .v-opening-rush::after{animation:none!important}
