@@ -57,7 +57,7 @@ function setVisibility(show){$("#mv-dialogue").hidden=!show;$("#mv-back").hidden
 function speaker(who){
  const unknown=who==="UNKNOWN SIGNAL"||who==="VOYAGER 1"&&!state.identity;
  const label=who==="PLAYER"?player:unknown?"UNKNOWN SIGNAL":who;
- const avatar=who==="PLAYER"?'<span class="mv-person" aria-hidden="true">◇</span>':unknown?'<span class="mv-unknown-avatar" aria-hidden="true">✦</span>':'<img class="mv-avatar-pic" src="'+IM.space+'" alt="">';
+ const avatar=who==="PLAYER"?'<span class="mq-avatar human" aria-hidden="true"><svg viewBox="0 0 64 64"><circle cx="32" cy="32" r="32" fill="#e8cb9e"/><path d="M8 57q4-16 24-16t24 16" fill="#557987"/><circle cx="32" cy="27" r="15" fill="#b77c55"/><path d="M17 26q0-18 15-18 17 0 15 20l-5-10q-10 7-25 8" fill="#322a2a"/><circle cx="27" cy="29" r="1.6" fill="#312326"/><circle cx="37" cy="29" r="1.6" fill="#312326"/><path d="M28 36q4 3 8 0" fill="none" stroke="#6a403d" stroke-width="1.8" stroke-linecap="round"/></svg></span>':unknown?'<span class="mv-unknown-avatar" aria-hidden="true">✦</span>':'<img class="mv-avatar-pic" src="'+IM.space+'" alt="">';
  $("#mv-speaker").innerHTML=avatar+'<b>'+esc(label)+'</b>';
 }
 function reveal(){state.identity=true;$("#mv-location").textContent="VOYAGER 1 · INTERSTELLAR SPACE";const el=$("#mv-reveal");el.hidden=false;el.innerHTML='<div class="mv-reveal-inner"><img src="'+IM.space+'" alt="Voyager 1"><span>NASA / JPL · 1977–PRESENT</span><strong>VOYAGER 1</strong><small>THE INTERSTELLAR TRAVELER</small></div>';wait=setTimeout(()=>{el.hidden=true;},2700);persist();}
@@ -76,6 +76,7 @@ function showLine(b){
 function setFrame(name){
  const map={darkness:"space",launch:"space",jupiter:"jupiter",io:"io",saturn:"saturn",titan:"titan",earth:"earth",space:"space"};
  if(map[name])pic(map[name]);
+ if(name==="darkness"){$("#mv-picture").style.visibility="hidden";}
  if(name==="launch"){const film=$("#mv-cinema");film.innerHTML='<div class="mv-launch-memory"><span>SEPTEMBER 5, 1977 · CAPE CANAVERAL</span><button data-v="launchFilm">VIEW HISTORICAL LAUNCH FILM ▷</button><small>NASA / JPL archival footage</small></div>';film.classList.add("mv-cinema-on");}
  else{$("#mv-cinema").classList.remove("mv-cinema-on");$("#mv-cinema").innerHTML="";}
 }
@@ -83,6 +84,7 @@ function hold(b){
  setVisibility(false);$("#mv-activity").hidden=true;
  const c=$("#mv-cinema");c.classList.add("mv-cinema-on");c.innerHTML='<div class="mv-hold mv-hold-'+esc(b.kind)+'"><div class="mv-hold-visual"><span class="mv-hold-orbit"></span><span class="mv-hold-signal"></span></div><button data-v="skipHold" aria-label="Continue cinematic moment">CONTINUE →</button></div>';
  if(b.kind==="ioFilm"){pic("io");c.innerHTML='<div class="mv-plume-visual"><span class="mv-plume"></span><span class="mv-plume-2"></span><small>RECONSTRUCTION · NOT NASA FOOTAGE</small><button data-v="skipHold">CONTINUE →</button></div>';soundscape("ocean");}
+ if(b.kind==="approach"){$("#mv-picture").style.visibility="visible";pic("space");}
  if(b.kind==="jupiterApproach")pic("jupiter");
  if(b.kind==="titanReveal")pic("titan");
  if(b.kind==="fadeToEarth")pic("earth");
@@ -103,7 +105,7 @@ function simple(title,body,button="CONTINUE",next="complete"){
 }
 function act(b){
  const id=b.id;let html="";
- if(id==="track"){pic("space");overlay('<div class="mv-aim"><p>There it is. Follow that moving point.</p><button class="mv-glint" data-v="found:track" aria-label="Follow the small moving object"></button></div>');return;}
+ if(id==="track"){overlay('<div class="mv-aim"><p>There it is. Follow that moving point.</p><button class="mv-glint" data-v="found:track" aria-label="Follow the small moving object"></button></div>');return;}
  if(id==="antenna"||id==="boom"||id==="findRecord"){
  pic("space");const pos=id==="antenna"?[51,44]:id==="boom"?[71,65]:[63,68];
  photoAction("space",b.hint,[...pos,id],'<div class="mv-optical">Move toward the gentle glint on the spacecraft.</div>');return;}
@@ -183,7 +185,7 @@ function click(e){
  const o=score[state.i]?.options?.[Number(val)];if(!o)return;state.answer[score[state.i].scene]=o.flag||o.branch||val;
  const text=o.reply;$("#mv-activity").hidden=true;setVisibility(true);speaker("VOYAGER 1");typeLine(text);
  $("#mv-next").dataset.v="choiceNext";persist();return;}
- if(act==="choiceNext"){$("#mv-next").dataset.v="next";advance(true);return;}
+ if(act==="choiceNext"){if(typing){clearInterval(typing);typing=null;$("#mv-text").textContent=score[state.i]?.options?.[Number(state.answer[score[state.i].scene])]?.reply||$("#mv-text").textContent;return;}$("#mv-next").dataset.v="next";advance(true);return;}
  if(act==="beep"){audio("signal");return;}
  if(act==="ocean"){soundscape("ocean");return;}
  if(act==="launchFilm"){showFilm();return;}
