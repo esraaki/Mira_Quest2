@@ -1,0 +1,56 @@
+name: Bundle NASA Voyager image assets
+on:
+  push:
+    paths:
+      - '.github/workflows/voyager-assets.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  media:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download source-credited NASA imagery
+        run: |
+          mkdir -p assets/voyager
+          python3 - <<'PY'
+          import urllib.request, pathlib, time
+          base=pathlib.Path('assets/voyager')
+          images={
+            'voyager-space.jpg':'https://assets.science.nasa.gov/dynamicimage/assets/science/psd/photojournal/pia/pia17/pia17049/PIA17049.jpg?fit=clip&w=1600',
+            'jupiter.jpg':'https://assets.science.nasa.gov/dynamicimage/assets/science/psd/photojournal/pia/pia01/pia01384/PIA01384.jpg?fit=clip&w=1600',
+            'io.jpg':'https://assets.science.nasa.gov/dynamicimage/assets/science/psd/photojournal/pia/pia00/pia00379/PIA00379.jpg?fit=clip&w=1200',
+            'saturn.jpg':'https://assets.science.nasa.gov/dynamicimage/assets/science/psd/photojournal/pia/pia02/pia02225/jpeg/PIA02225.jpg?fit=clip&w=1600',
+            'titan.jpg':'https://upload.wikimedia.org/wikipedia/commons/4/4b/Titan_-_Nov_11_1980_%2822485272399%29.jpg',
+            'pale-blue-dot.jpg':'https://assets.science.nasa.gov/dynamicimage/assets/science/psd/photojournal/pia/pia23/pia23645/PIA23645.jpg?fit=clip&w=1600',
+            'golden-record.jpg':'https://assets.science.nasa.gov/dynamicimage/assets/science/cds/general/images/2024/03/voyager-record-cover-446eb9.jpg?fit=clip&w=1500'
+          }
+          for name,url in images.items():
+            destination=base/name
+            if destination.exists() and destination.stat().st_size>1000: continue
+            ok=False
+            for attempt in range(3):
+              try:
+                req=urllib.request.Request(url,headers={'User-Agent':'Mozilla/5.0 (MIRA Quest educational project)'})
+                with urllib.request.urlopen(req,timeout=40) as r:
+                  data=r.read(10_000_000)
+                  mime=r.headers.get('Content-Type','')
+                if not mime.startswith('image/') or len(data)<500: raise ValueError('Invalid image: '+mime)
+                destination.write_bytes(data)
+                print(name,len(data),'bytes',mime)
+                ok=True
+                break
+              except Exception as e:
+                print('Warning:',name,str(e));time.sleep(2)
+            if not ok: print('ASSET NOT AVAILABLE',name)
+          PY
+      - name: Commit downloaded images
+        run: |
+          git config user.name 'MIRA Quest Assets'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add assets/voyager
+          if ! git diff --cached --quiet; then
+            git commit -m 'Bundle authentic Voyager mission imagery from NASA archives'
+            git push origin HEAD:main
+          fi
