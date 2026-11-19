@@ -50,6 +50,7 @@ function pic(name){
 function sceneStart(n){
  if(showingScene===n.id)return;
  showingScene=n.id;
+ if(n.id==="record")pic("record");
  $("#mv-location").textContent=state.identity?"VOYAGER 1 · "+n.year:n.year;
  // No forced header revealing mission locations before the dialogue introduces them.
 }
@@ -83,7 +84,7 @@ function setFrame(name){
 function hold(b){
  setVisibility(false);$("#mv-activity").hidden=true;
  const c=$("#mv-cinema");c.classList.add("mv-cinema-on");c.innerHTML='<div class="mv-hold mv-hold-'+esc(b.kind)+'"><div class="mv-hold-visual"><span class="mv-hold-orbit"></span><span class="mv-hold-signal"></span></div><button data-v="skipHold" aria-label="Continue cinematic moment">CONTINUE →</button></div>';
- if(b.kind==="ioFilm"){pic("io");c.innerHTML='<div class="mv-plume-visual"><span class="mv-plume"></span><span class="mv-plume-2"></span><small>RECONSTRUCTION · NOT NASA FOOTAGE</small><button data-v="skipHold">CONTINUE →</button></div>';soundscape("ocean");}
+ if(b.kind==="ioFilm"){pic("io");c.innerHTML='<div class="mv-plume-visual"><span class="mv-plume"></span><span class="mv-plume-2"></span><small>RECONSTRUCTION · NOT NASA FOOTAGE · <a href="https://science.nasa.gov/photojournal/map-of-ios-volcanic-heat-flow/" target="_blank" rel="noopener">NASA IO ANIMATION ↗</a></small><button data-v="skipHold">CONTINUE →</button></div>';soundscape("ocean");}
  if(b.kind==="approach"){$("#mv-picture").style.visibility="visible";pic("space");}
  if(b.kind==="jupiterApproach")pic("jupiter");
  if(b.kind==="titanReveal")pic("titan");
