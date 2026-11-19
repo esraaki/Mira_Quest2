@@ -9,6 +9,7 @@ on:
       - 'voyager-adventure.css'
       - 'voyager-rebuilt.css'
       - 'smoke-test.cjs'
+      - 'voyager-journey-test.cjs'
   workflow_dispatch:
 permissions:
   contents: read
@@ -30,6 +31,7 @@ jobs:
         run: |
           npm install --no-save --ignore-scripts jsdom@26
           node smoke-test.cjs
+          node voyager-journey-test.cjs
       - name: Confirm all bundled Voyager media and original mission files
         run: |
           test -s index.html
