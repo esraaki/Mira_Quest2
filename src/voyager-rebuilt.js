@@ -61,17 +61,17 @@ function speaker(who){
  $("#mv-speaker").innerHTML=avatar+'<b>'+esc(label)+'</b>';
 }
 function reveal(){state.identity=true;$("#mv-location").textContent="VOYAGER 1 · INTERSTELLAR SPACE";const el=$("#mv-reveal");el.hidden=false;el.innerHTML='<div class="mv-reveal-inner"><img src="'+IM.space+'" alt="Voyager 1"><span>NASA / JPL · 1977–PRESENT</span><strong>VOYAGER 1</strong><small>THE INTERSTELLAR TRAVELER</small></div>';wait=setTimeout(()=>{el.hidden=true;},2700);persist();}
-function typeLine(content){
+function typeLine(content,onComplete){
  let target=$("#mv-text");target.textContent="";const words=content.split(/(\s+)/).filter(Boolean);let pos=0;let delay=reduced?0:43;
  $("#mv-next").textContent="CONTINUE →";
- if(!delay){target.textContent=content;return;}
- typing=setInterval(()=>{target.textContent+=words[pos++]||"";if(pos>=words.length){clearInterval(typing);typing=null;}},delay);
+ if(!delay){target.textContent=content;if(onComplete)onComplete();return;}
+ typing=setInterval(()=>{target.textContent+=words[pos++]||"";if(pos>=words.length){clearInterval(typing);typing=null;if(onComplete)onComplete();}},delay);
 }
 function showLine(b){
  $("#mv-activity").hidden=true;$("#mv-modal").hidden=true;setVisibility(true);
  speaker(b.who);
  const text=b.text.replaceAll("{name}",player);
- typeLine(text);if(b.reveal&&!state.identity)reveal();
+ typeLine(text,b.reveal&&!state.identity?reveal:null);
 }
 function setFrame(name){
  const map={darkness:"space",launch:"space",jupiter:"jupiter",io:"io",saturn:"saturn",titan:"titan",earth:"earth",space:"space"};
@@ -117,7 +117,7 @@ function act(b){
  if(id==="pulsar"||id==="playback"){pic("record");const x=id==="pulsar"?34:64,y=id==="pulsar"?73:33;photoAction("record",id==="pulsar"?"Examine the radiating marks near the bottom of the cover.":"Examine the diagram showing how the record could be played.",[x,y,id,"Inspect the engraved "+id+" marks"]);return;}
  if(id==="greeting"){simple("A VOICE FROM EARTH",'<p>Recorded in 1977 by Nick Sagan. The original English greeting is preserved on the Golden Record.</p><audio controls preload="none" src="'+GREETING+'" aria-label="Original Golden Record English greeting"></audio><blockquote>“Hello from the children of planet Earth.”</blockquote><a href="https://commons.wikimedia.org/wiki/File:Voyager_Golden_Record_greeting_in_English.ogg" target="_blank" rel="noopener">Recording and public-domain attribution ↗</a>','I HEARD IT');return;}
  if(id==="greetingExplore"){simple("MANY LANGUAGES",'<p>There are 55 spoken-language greetings on the record. In Arabic, the greeting wishes that we might meet one day. These voices were recorded by real people.</p><p>Listen to the source collection to hear the variety of words and accents—not a synthetic imitation.</p><a target="_blank" rel="noopener" href="https://science.nasa.gov/mission/voyager/golden-record-contents/greetings/">NASA original greeting archive ↗</a>','CONTINUE');return;}
- if(id==="earthSound"){simple("THE SOUNDS OF EARTH",'<div class="mv-ocean"><span class="mv-wave one"></span><span class="mv-wave two"></span><span class="mv-wave three"></span></div><p>Imagine waves against a shore, birds overhead, and wind across the water. This is an original sound-design interpretation, not a recording taken from the Golden Record.</p><button data-v="ocean" class="mv-small-control">PLAY SHORT EARTH SOUNDSCAPE ▷</button><a target="_blank" rel="noopener" href="'+MUSIC+'">NASA inventory of the original sounds ↗</a>','RETURN TO VOYAGER');return;}
+ if(id==="earthSound"){simple("THE SOUNDS OF EARTH",'<div class="mv-ocean"><span class="mv-wave one"></span><span class="mv-wave two"></span><span class="mv-wave three"></span></div><p>Imagine waves against a shore, birds overhead, and wind across the water. This is an original sound-design interpretation, not a recording taken from the Golden Record.</p><button data-v="ocean" class="mv-small-control">PLAY SHORT EARTH SOUNDSCAPE ▷</button><a target="_blank" rel="noopener" href="'+MUSIC+'">NASA inventory of the original sounds ↗</a><details class="mv-official-sounds"><summary>LISTEN TO NASA’S ORIGINAL SOUNDS OF EARTH COLLECTION</summary><iframe loading="lazy" title="NASA Golden Record Sounds of Earth via SoundCloud" src="https://w.soundcloud.com/player/?url=https%3A%2F%2Fapi.soundcloud.com%2Fplaylists%2F129030648&amp;color=%23bca06c&amp;auto_play=false&amp;hide_related=true&amp;show_comments=false&amp;show_user=false&amp;show_reposts=false&amp;visual=false" allow="autoplay" referrerpolicy="no-referrer" height="166"></iframe></details>','RETURN TO VOYAGER');return;}
  if(id==="recordImages"){simple("IMAGES OF HOME",'<div class="mv-record-images"><div class="mv-record-card"><img src="'+IM.earth+'" alt="Pale Blue Dot, a separate Voyager photograph"><span>EARTH · THE WORLD WE KNOW</span></div><div class="mv-record-card"><div class="mv-glyph">◯<small>DNA · LIFE · TIME</small></div><span>SCIENTIFIC IDEAS · ILLUSTRATED INTERPRETATION</span></div></div><p>The actual record contains 115 encoded pictures. This sequence visualizes themes; it does not falsely pass other Voyager photographs off as frames from the record.</p><a target="_blank" rel="noopener" href="https://science.nasa.gov/mission/voyager/golden-record-contents/images/">Browse the genuine 115-image inventory ↗</a>','RETURN TO VOYAGER');return;}
  if(id==="recordMusic"){simple("MUSIC CHOSEN FOR THE RECORD",'<div class="mv-music-list"><p><b>Bach</b> · Brandenburg Concerto No. 2 <small>Germany</small></p><p><b>Goro Yamaguchi</b> · “Tsuru No Sugomori” <small>Japan</small></p><p><b>Valya Balkanska</b> · “Izlel je Delyo Hagdutin” <small>Bulgaria</small></p><p><b>Blind Willie Johnson</b> · “Dark Was the Night” <small>United States</small></p></div><p>These are titles of actual selections. Original performances have not been embedded without cleared playback rights.</p><a target="_blank" rel="noopener" href="'+MUSIC+'">View NASA’s complete track list ↗</a>','RETURN TO VOYAGER');return;}
  if(["particles","cosmic","plasma"].includes(id)){
@@ -149,7 +149,7 @@ function process(){
  advance(true);
 }
 function advance(force=false){
- if(!force&&typing){clearInterval(typing);typing=null;$("#mv-text").textContent=score[state.i]?.text?.replaceAll("{name}",player)||"";return;}
+ if(!force&&typing){clearInterval(typing);typing=null;$("#mv-text").textContent=score[state.i]?.text?.replaceAll("{name}",player)||"";if(score[state.i]?.reveal&&!state.identity)reveal();return;}
  clearInterval(typing);typing=null;state.i++;persist();process();
 }
 function back(){
@@ -185,7 +185,7 @@ function click(e){
  const o=score[state.i]?.options?.[Number(val)];if(!o)return;state.answer[score[state.i].scene]=o.flag||o.branch||val;
  const text=o.reply;$("#mv-activity").hidden=true;setVisibility(true);speaker("VOYAGER 1");typeLine(text);
  $("#mv-next").dataset.v="choiceNext";persist();return;}
- if(act==="choiceNext"){if(typing){clearInterval(typing);typing=null;$("#mv-text").textContent=score[state.i]?.options?.[Number(state.answer[score[state.i].scene])]?.reply||$("#mv-text").textContent;return;}$("#mv-next").dataset.v="next";advance(true);return;}
+ if(act==="choiceNext"){if(typing){clearInterval(typing);typing=null;$("#mv-text").textContent=score[state.i]?.options?.find(o=>o.flag===state.answer[score[state.i].scene]||o.branch===state.answer[score[state.i].scene])?.reply||$("#mv-text").textContent;return;}$("#mv-next").dataset.v="next";advance(true);return;}
  if(act==="beep"){audio("signal");return;}
  if(act==="ocean"){soundscape("ocean");return;}
  if(act==="launchFilm"){showFilm();return;}
