@@ -1,0 +1,31 @@
+name: Validate MIRA Quest 2 scripts
+on:
+  push:
+    paths:
+      - '.github/workflows/verify-voyager.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check JavaScript syntax
+        run: |
+          node --check src/game-next.js
+          node --check src/story.js
+          node --check src/voyager.js
+          node --check src/voyager-story.js
+      - name: Confirm all bundled Voyager media and original mission files
+        run: |
+          test -s index.html
+          test -s src/story.js
+          test -s src/game-next.js
+          for name in voyager-space jupiter io saturn titan pale-blue-dot golden-record; do
+            test -s "assets/voyager/$name.jpg" || { echo "Missing $name"; exit 1; }
+          done
+          grep -q 'data-act' src/game-next.js
+          grep -q 'hubChoose' src/game-next.js
+          grep -q 'window.MIRA_VOYAGER_STORY' src/voyager-story.js
+          echo 'All source and asset checks passed'
