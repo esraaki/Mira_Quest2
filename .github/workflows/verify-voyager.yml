@@ -6,6 +6,7 @@ on:
       - 'src/**'
       - 'index.html'
       - 'voyager.css'
+      - 'smoke-test.cjs'
   workflow_dispatch:
 permissions:
   contents: read
@@ -20,6 +21,10 @@ jobs:
           node --check src/story.js
           node --check src/voyager.js
           node --check src/voyager-story.js
+      - name: Test mission-card and Voyager navigation
+        run: |
+          npm install --no-save --ignore-scripts jsdom@26
+          node smoke-test.cjs
       - name: Confirm all bundled Voyager media and original mission files
         run: |
           test -s index.html
