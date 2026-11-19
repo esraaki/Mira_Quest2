@@ -32,7 +32,7 @@ function render(){
  let response=state.reply?'<div class="v-response"><b>VOYAGER 1</b><p>'+esc(state.reply)+'</p></div>':'';
  let nextText=state.chapter===chapters().length-1&&state.line===c.beats.length-1?'FINISH CHAPTER →':state.line===c.beats.length-1?'CONTINUE THE JOURNEY →':'CONTINUE →';
  root.innerHTML='<main class="v-screen '+(reduce?'v-reduced':'')+'">'
- +'<div class="v-backdrop '+(vis==='voyager'?'v-drift':'')+'">'+picture(vis)+'</div><div class="v-vignette"></div>'
+ +'<div class="v-backdrop '+(vis==='voyager'?'v-drift':'')+(state.chapter===0&&state.line===0?' v-opening-rush':'')+'">'+picture(vis)+'</div><div class="v-vignette"></div>'
  +'<header class="v-header"><strong>MIRA QUEST</strong><span>VOYAGER 1 · '+esc(c.era)+'</span><div><button data-vact="archive">▤ ARCHIVE</button><button data-vact="hub">ALL MISSIONS</button></div></header>'
  +'<div class="v-scene-title"><span class="v-kicker">CHAPTER '+String(state.chapter+1).padStart(2,'0')+' / '+String(chapters().length).padStart(2,'0')+'</span><h1>'+esc(c.title)+'</h1>'+(state.chapter===0?'<div class="v-speed">17 km/s <small>≈ 61,200 km/h relative to the Sun</small></div>':'')+'</div>'
  +'<section class="v-dialogue '+(bt.who==='NARRATOR'?'v-narrator':'')+'"><div class="v-speaker"><span>'+ (bt.who==='PLAYER'?'◇':'✦')+'</span><b>'+esc(who)+'</b></div><p>'+esc(bt.text)+'</p>'+response+choices+'<div class="v-controls"><button data-vact="prev" '+(state.chapter===0&&state.line===0?'disabled':'')+'>←</button>'+(vis==='heliopause'?'<span class="v-credit-link">SCHEMATIC</span>':'<button data-vact="inspect">EXAMINE NASA IMAGE ↗</button>')+'<span class="v-fill"></span><button class="v-btn" data-vact="next" '+(bt.choices&&!state.reply?'disabled':'')+'>'+nextText+'</button></div></section>'
