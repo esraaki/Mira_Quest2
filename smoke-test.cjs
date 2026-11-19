@@ -21,7 +21,7 @@ click('[data-act="hubChoose:voyager"]');
 assert.match(html(),/A glint in the dark/);
 assert.match(html(),/Darkness/);
 assert.ok(!html().includes('v-progress'), 'No slideshow progress bar');
-for(let i=0;i<8;i++)click('[data-va="next"]');
+for(let i=0;i<9;i++)click('[data-va="next"]');
 assert.match(html(),/Investigate the unfamiliar spacecraft/);
 click('[data-va="select:dish"]');click('[data-va="select:power"]');
 click('[data-va="done"]');
