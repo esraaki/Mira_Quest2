@@ -3,6 +3,9 @@ on:
   push:
     paths:
       - '.github/workflows/verify-voyager.yml'
+      - 'src/**'
+      - 'index.html'
+      - 'voyager.css'
   workflow_dispatch:
 permissions:
   contents: read
