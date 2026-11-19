@@ -224,6 +224,7 @@ function archive(){
 }
 function render(){
  if(!root)return;
+ if(state.inspected){const k=state.inspected;root.innerHTML='<main class="v-screen va-adventure va-archive">'+header(ch())+'<section class="va-archive-inner"><span class="va-overline">NASA MISSION ARCHIVE</span><h1>'+esc(k.toUpperCase())+'</h1>'+img(k,'va-archive-detail')+'<p>Image or artist concept preserved in the project archive. Check the linked NASA source for its original context.</p><p><a href="'+esc(sources[k]||sources.ship)+'" target="_blank" rel="noopener">VIEW ORIGINAL NASA SOURCE ↗</a></p><button class="v-btn" data-va="closeView">BACK TO ARCHIVE →</button></section></main>';return;}
  if(state.archive){root.innerHTML=archive();return;}
  const c=ch(),stage=state.phase==='activity',vis=img(c.image);
  root.innerHTML='<main class="v-screen va-adventure '+(reduce?'v-reduced':'')+'"><div class="v-backdrop va-backdrop">'+vis+'</div><div class="v-vignette"></div>'+header(c)+
@@ -249,8 +250,9 @@ function click(e){
  if(act==='select'){playFx('scan');remember(arg);render();}
  if(act==='done'){playFx('correct');state.phase='after';state.line=0;state.done[key()]=true;save();render();}
  if(act==='ask'){playFx('dialogue');state.reply=ch().questions[Number(arg)]?.[1]||'';render();}
- if(act==='archive'){state.archive=!state.archive;render();}
+ if(act==='archive'){state.inspected=false;state.archive=!state.archive;render();}
  if(act==='view'){state.archive=false;state.inspected=arg;render();}
+ if(act==='closeView'){state.inspected=false;state.archive=true;render();}
  if(act==='exit'){onExit&&onExit();}
 }
 function keys(e){if(!root||!root.querySelector('.va-adventure')||e.repeat||e.metaKey||e.altKey||e.ctrlKey||['INPUT','TEXTAREA','BUTTON','A'].includes(document.activeElement?.tagName))return;if((e.key==='Enter'||e.key===' ')&&state.phase!=='activity'&&!state.archive){e.preventDefault();next();}}
