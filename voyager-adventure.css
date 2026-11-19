@@ -33,3 +33,6 @@
 .va-dialogue.mq-dialogue.mq-card{height:auto;min-height:170px;max-height:54vh;display:block;background:linear-gradient(140deg,rgba(62,88,112,.26),rgba(13,28,43,.38))!important;border:1px solid #e5f2ff66!important;border-top:1px solid #ffffff99!important;backdrop-filter:blur(30px) saturate(165%);border-radius:22px}
 .va-dialogue-actions{align-items:center;justify-content:space-between!important;gap:12px}
 .va-dialogue .mq-speech{flex:initial}
+
+.va-archive-detail{width:100%;max-width:900px;max-height:58vh;object-fit:contain;display:block;background:#01060c;border-radius:12px;margin:24px 0}
+.va-archive-inner a{color:#f0d5a3}
