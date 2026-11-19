@@ -1,0 +1,258 @@
+{
+  "version": "2026-11-19-rebuild",
+  "policy": "Historical imagery and statements are sourced where available; dramatized speech, sound design and reconstructions are identified separately. Do not present illustrations as photographs or claim uncleared recordings as embedded.",
+  "media": [
+    {
+      "id": "launch-vintage",
+      "beat": "origin",
+      "type": "video",
+      "status": "embedded-online",
+      "source": "https://commons.wikimedia.org/wiki/File:Voyager_1_Launches.webm",
+      "credit": "NASA/JPL; Wikimedia Commons",
+      "rights": "public domain US",
+      "purpose": "optional historical launch footage; player initiated"
+    },
+    {
+      "id": "opening-flyby",
+      "beat": "contact",
+      "type": "cinematic",
+      "status": "css-reconstruction",
+      "source": "",
+      "credit": "Original game animation",
+      "rights": "original",
+      "purpose": "small glint before identity"
+    },
+    {
+      "id": "voyager-portrait",
+      "beat": "contact",
+      "type": "image",
+      "status": "bundled",
+      "file": "assets/voyager/voyager-space.jpg",
+      "credit": "NASA/JPL-Caltech artist concept",
+      "rights": "NASA source",
+      "purpose": "identity reveal and portraits"
+    },
+    {
+      "id": "jupiter-real",
+      "beat": "jupiter",
+      "type": "image",
+      "status": "bundled",
+      "file": "assets/voyager/jupiter.jpg",
+      "credit": "NASA/JPL-Caltech",
+      "purpose": "full Jupiter disc, no crop"
+    },
+    {
+      "id": "io-real",
+      "beat": "jupiter",
+      "type": "image",
+      "status": "bundled",
+      "file": "assets/voyager/io.jpg",
+      "credit": "NASA/JPL-Caltech",
+      "purpose": "evidence plume photo"
+    },
+    {
+      "id": "io-plume-recreation",
+      "beat": "jupiter",
+      "type": "cinematic",
+      "status": "css-reconstruction",
+      "source": "https://science.nasa.gov/photojournal/map-of-ios-volcanic-heat-flow/",
+      "purpose": "after discovery, clearly simulated"
+    },
+    {
+      "id": "gravity-assist",
+      "beat": "jupiter",
+      "type": "cinematic",
+      "status": "animated-schematic",
+      "purpose": "moving orbital assist; not scale model"
+    },
+    {
+      "id": "saturn-real",
+      "beat": "saturn",
+      "type": "image",
+      "status": "bundled",
+      "file": "assets/voyager/saturn.jpg",
+      "credit": "NASA/JPL",
+      "purpose": "full image on black"
+    },
+    {
+      "id": "saturn-reveal",
+      "beat": "saturn",
+      "type": "cinematic",
+      "status": "css-reconstruction",
+      "purpose": "planet named before reveal"
+    },
+    {
+      "id": "titan-real",
+      "beat": "saturn",
+      "type": "image",
+      "status": "bundled",
+      "file": "assets/voyager/titan.jpg",
+      "credit": "NASA/JPL",
+      "purpose": "haze"
+    },
+    {
+      "id": "twin-paths",
+      "beat": "saturn",
+      "type": "diagram",
+      "status": "implemented-schematic",
+      "purpose": "Voyager 1 vs Voyager 2 routes"
+    },
+    {
+      "id": "pale-blue-dot",
+      "beat": "pale",
+      "type": "image",
+      "status": "bundled",
+      "file": "assets/voyager/pale-blue-dot.jpg",
+      "credit": "NASA/JPL-Caltech",
+      "purpose": "original unaltered photo + separate hotspot"
+    },
+    {
+      "id": "golden-cover",
+      "beat": "record",
+      "type": "image",
+      "status": "bundled",
+      "file": "assets/voyager/golden-record.jpg",
+      "credit": "NASA/JPL-Caltech",
+      "purpose": "full cover with etched marks"
+    },
+    {
+      "id": "golden-greeting-english",
+      "beat": "record",
+      "type": "audio",
+      "status": "embedded-online",
+      "source": "https://commons.wikimedia.org/wiki/File:Voyager_Golden_Record_greeting_in_English.ogg",
+      "credit": "NASA / Nick Sagan; Wikimedia Commons",
+      "rights": "public-domain attribution per Wikimedia",
+      "purpose": "original English recording"
+    },
+    {
+      "id": "golden-greetings-other",
+      "beat": "record",
+      "type": "audio",
+      "status": "source-linked",
+      "source": "https://science.nasa.gov/mission/voyager/golden-record-contents/greetings/",
+      "purpose": "do not invent translated speech"
+    },
+    {
+      "id": "golden-earth-sounds",
+      "beat": "record",
+      "type": "audio",
+      "status": "official-stream-embedded",
+      "source": "https://w.soundcloud.com/player/?url=https%3A%2F%2Fapi.soundcloud.com%2Fplaylists%2F129030648",
+      "credit": "NASA public SoundCloud playlist",
+      "purpose": "original sound samples, independently player initiated"
+    },
+    {
+      "id": "golden-earth-interpretation",
+      "beat": "record",
+      "type": "audio",
+      "status": "synthesized",
+      "credit": "Original Web Audio sound design",
+      "purpose": "theatrical underscore, not alleged original Golden Record audio"
+    },
+    {
+      "id": "golden-music",
+      "beat": "record",
+      "type": "music",
+      "status": "metadata-only-rights-pending",
+      "source": "https://science.nasa.gov/mission/voyager/golden-record-contents/sounds/",
+      "purpose": "rights-cleared original performances are not embedded; actual selection credits displayed"
+    },
+    {
+      "id": "golden-115-images",
+      "beat": "record",
+      "type": "image-series",
+      "status": "illustrative-theme-stand-ins",
+      "source": "https://science.nasa.gov/mission/voyager/golden-record-contents/images/",
+      "purpose": "do not misidentify other photographs as Record's original frames"
+    },
+    {
+      "id": "heliopause-schematic",
+      "beat": "heliopause",
+      "type": "diagram",
+      "status": "implemented-schematic",
+      "purpose": "illustrative only, NASA reference pending inclusion"
+    },
+    {
+      "id": "heliopause-original",
+      "beat": "heliopause",
+      "type": "image",
+      "status": "reference-provided-pending-bundling",
+      "purpose": "user supplied NASA PIA22835 diagram; pending optimization and upload"
+    },
+    {
+      "id": "solar-particle-readings",
+      "beat": "heliopause",
+      "type": "data-animation",
+      "status": "qualitative-schematic",
+      "purpose": "not raw data; accurate trend only"
+    },
+    {
+      "id": "dsn-array",
+      "beat": "communication",
+      "type": "image-video",
+      "status": "planned",
+      "source": "https://science.nasa.gov/mission/voyager/",
+      "purpose": "archival antennas and communications operations, add media with source attribution"
+    },
+    {
+      "id": "radio-pulse",
+      "beat": "communication",
+      "type": "cinematic",
+      "status": "implemented-css-and-synth-audio",
+      "purpose": "fictional accelerated signal"
+    },
+    {
+      "id": "binary-demo",
+      "beat": "communication",
+      "type": "interactive",
+      "status": "implemented",
+      "purpose": "two 8-bit ASCII values"
+    },
+    {
+      "id": "rtg-hardware",
+      "beat": "operations",
+      "type": "image",
+      "status": "planned",
+      "source": "https://science.nasa.gov/mission/voyager/voyager-1/",
+      "purpose": "actual hardware reference"
+    },
+    {
+      "id": "instrument-retirement",
+      "beat": "operations",
+      "type": "timeline",
+      "status": "implemented-text-sequence",
+      "purpose": "selected scientific retirement events; historic"
+    },
+    {
+      "id": "future-trajectory",
+      "beat": "future",
+      "type": "cinematic",
+      "status": "implemented-css-reconstruction",
+      "purpose": "craft receding toward sparse interstellar sky"
+    },
+    {
+      "id": "gliese445",
+      "beat": "future",
+      "type": "diagram",
+      "status": "planned",
+      "purpose": "40,000 years and ~1.6–1.7 light years, not a planetary close flyby"
+    }
+  ],
+  "soundDesign": [
+    "quiet cosmic hum (stylized; space cannot carry sound)",
+    "first-contact tuning cue",
+    "subtle dialogue word-by-word animation",
+    "launch historical audio as provided in original film",
+    "Io surprise underscoring (original)",
+    "Saturn soft atmospheric textural sound",
+    "Pale Blue Dot almost silent moment",
+    "Golden Record original English greeting",
+    "Golden Record official Sounds of Earth external playlist",
+    "Golden Record copyrighted original music rights gate",
+    "radio transmission synthetic carrier",
+    "engineering ambient power decline",
+    "final carrier fade"
+  ],
+  "implementationNotes": "Bundled local static images are already in the repository; online files require internet connection. Generated cinematic motion is implemented in CSS and Web Audio rather than distributing large pre-rendered videos. Additional archival video/photo assets are listed but not yet integrated. Source metadata and rights should be verified before publishing third-party recordings."
+}
