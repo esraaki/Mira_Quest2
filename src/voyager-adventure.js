@@ -165,7 +165,7 @@ V('My trajectory continues.'),
 N('The spacecraft disappears into the starfield. No percentage. No countdown. Just distance.')
 ],questions:[['If humans catch up someday, what would they find?','The spacecraft itself, perhaps its record, and hardware shaped by a very long journey. Its condition would depend on events impossible to predict now.'],['What would you ask a person from the future?','What have you learned about the worlds I once passed? And what do you know now about the place that sent me?']]}
 ];
-let root,onExit,player='Explorer',reduce=false;
+let root,onExit,player='Explorer',reduce=false;let lastFx=0;function playFx(file){try{const sound=new Audio('assets/audio/'+file+'.mp3');sound.volume=.25;sound.play().catch(()=>{});}catch(e){}}
 const KEY='mira-quest2-voyager-adventure';
 let state={chapter:0,phase:'intro',line:0,done:{},seen:{},reply:'',archive:false,inspected:false,focus:0};
 try{const v=JSON.parse(localStorage.getItem(KEY)||'null');if(v&&Number.isInteger(v.chapter)&&v.chapter<chapters.length)state={...state,...v,archive:false,inspected:false,reply:''};}catch(e){}
@@ -181,8 +181,8 @@ function header(c){return '<header class="va-header"><span class="va-brand">MIRA
 function dialogue(){
  const c=ch(),set=state.phase==='intro'?c.intro:c.after,item=set[state.line],isLast=state.line===set.length-1;
  const label=item.who==='PLAYER'?player:item.who;
- const box='<section class="v-dialogue va-dialogue"><div class="v-speaker"><b>'+esc(label)+'</b></div><p>'+esc(item.text)+'</p>'+(state.reply?'<p class="va-reply">'+esc(state.reply)+'</p>':'')+
- '<div class="v-controls"><button data-va="back" '+(state.line===0?'disabled':'')+'>← BACK</button><span class="v-fill"></span><button class="v-btn" data-va="next">'+(isLast?(state.phase==='intro'?'INVESTIGATE →':state.chapter===chapters.length-1?'COMPLETE JOURNEY →':'CONTINUE JOURNEY →'):'CONTINUE →')+'</button></div></section>';
+ const box='<section class="mq-dialogue mq-card va-dialogue"><div class="mq-speaker"><b>'+esc(label)+'</b></div><p class="mq-speech">'+esc(item.text)+'</p>'+(state.reply?'<p class="va-reply">'+esc(state.reply)+'</p>':'')+
+ '<div class="mq-dialogue-actions va-dialogue-actions"><button class="mq-btn subtle" data-va="back" '+(state.line===0?'disabled':'')+'>← BACK</button><button class="mq-btn primary" data-va="next">'+(isLast?(state.phase==='intro'?'INVESTIGATE →':state.chapter===chapters.length-1?'COMPLETE JOURNEY →':'CONTINUE JOURNEY →'):'CONTINUE →')+'</button></div></section>';
  return box;
 }
 function tool(title,body,button='CONTINUE',disabled=false){
@@ -244,11 +244,11 @@ function next(){
 function click(e){
  const el=e.target.closest('[data-va]');if(!el||!root||!root.contains(el))return;
  const [act,arg]=el.dataset.va.split(':');
- if(act==='next')next();
+ if(act==='next'){playFx('dialogue');next();}
  if(act==='back'&&state.line>0){state.line--;state.reply='';render();}
- if(act==='select'){remember(arg);render();}
- if(act==='done'){state.phase='after';state.line=0;state.done[key()]=true;save();render();}
- if(act==='ask'){state.reply=ch().questions[Number(arg)]?.[1]||'';render();}
+ if(act==='select'){playFx('scan');remember(arg);render();}
+ if(act==='done'){playFx('correct');state.phase='after';state.line=0;state.done[key()]=true;save();render();}
+ if(act==='ask'){playFx('dialogue');state.reply=ch().questions[Number(arg)]?.[1]||'';render();}
  if(act==='archive'){state.archive=!state.archive;render();}
  if(act==='view'){state.archive=false;state.inspected=arg;render();}
  if(act==='exit'){onExit&&onExit();}
